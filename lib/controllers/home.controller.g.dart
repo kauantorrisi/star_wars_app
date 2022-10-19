@@ -25,19 +25,35 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  late final _$personAtom =
-      Atom(name: '_HomeControllerBase.person', context: context);
+  late final _$starshipsAtom =
+      Atom(name: '_HomeControllerBase.starships', context: context);
 
   @override
-  PersonModel? get person {
-    _$personAtom.reportRead();
-    return super.person;
+  ObservableList<StarshipModel> get starships {
+    _$starshipsAtom.reportRead();
+    return super.starships;
   }
 
   @override
-  set person(PersonModel? value) {
-    _$personAtom.reportWrite(value, super.person, () {
-      super.person = value;
+  set starships(ObservableList<StarshipModel> value) {
+    _$starshipsAtom.reportWrite(value, super.starships, () {
+      super.starships = value;
+    });
+  }
+
+  late final _$starshipAtom =
+      Atom(name: '_HomeControllerBase.starship', context: context);
+
+  @override
+  StarshipModel? get starship {
+    _$starshipAtom.reportRead();
+    return super.starship;
+  }
+
+  @override
+  set starship(StarshipModel? value) {
+    _$starshipAtom.reportWrite(value, super.starship, () {
+      super.starship = value;
     });
   }
 
@@ -89,6 +105,14 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$fetchStarShipsAsyncAction =
+      AsyncAction('_HomeControllerBase.fetchStarShips', context: context);
+
+  @override
+  Future<void> fetchStarShips() {
+    return _$fetchStarShipsAsyncAction.run(() => super.fetchStarShips());
+  }
+
   late final _$fetchPersonsAsyncAction =
       AsyncAction('_HomeControllerBase.fetchPersons', context: context);
 
@@ -112,6 +136,14 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   Future<void> getPlanet(String id) {
     return _$getPlanetAsyncAction.run(() => super.getPlanet(id));
+  }
+
+  late final _$getStarshipAsyncAction =
+      AsyncAction('_HomeControllerBase.getStarship', context: context);
+
+  @override
+  Future<void> getStarship(String id) {
+    return _$getStarshipAsyncAction.run(() => super.getStarship(id));
   }
 
   late final _$_HomeControllerBaseActionController =
@@ -140,10 +172,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void restartStarship() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.restartStarship');
+    try {
+      return super.restartStarship();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 persons: ${persons},
-person: ${person},
+starships: ${starships},
+starship: ${starship},
 planet: ${planet},
 isLoading: ${isLoading},
 isError: ${isError}

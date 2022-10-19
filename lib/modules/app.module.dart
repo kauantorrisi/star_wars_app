@@ -4,11 +4,13 @@ import 'package:star_wars_app/pages/home_page.dart';
 import 'package:star_wars_app/pages/person_details_page.dart';
 import 'package:star_wars_app/service/person_service.dart';
 import 'package:star_wars_app/service/planet_service.dart';
+import 'package:star_wars_app/service/starship_service.dart';
 
 class AppModule extends Module {
   static List<Bind> services = [
-    Bind.lazySingleton<PlanetsService>((i) => PlanetsService()),
+    Bind.lazySingleton<PlanetService>((i) => PlanetService()),
     Bind.lazySingleton<PersonService>((i) => PersonService()),
+    Bind.lazySingleton<StarshipService>((i) => StarshipService()),
   ];
 
   static List<Bind> controllers = [

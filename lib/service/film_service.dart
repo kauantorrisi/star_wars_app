@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:star_wars_app/common/constants.dart';
 import '../models/film_model.dart';
 
-class FilmsService extends ChangeNotifier {
+class FilmsService {
   final dio = Dio();
 
   Future<void> getFilm({required String id}) async {

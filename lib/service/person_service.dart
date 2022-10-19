@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:star_wars_app/common/constants.dart';
 import '../models/person_model.dart';
 import 'package:dio/dio.dart';
 
-class PersonService extends ChangeNotifier {
+class PersonService {
   final Dio dio = Dio();
 
   Future<List<PersonModel>> fetchPersons({int? page}) async {
@@ -12,7 +11,6 @@ class PersonService extends ChangeNotifier {
     Response response = await dio
         .get('$URL_PERSONS?page=${page != null ? page.toString() : '1'}');
     List results = response.data["results"];
-
     for (var person in results) {
       persons.add(PersonModel.fromMap(person));
     }

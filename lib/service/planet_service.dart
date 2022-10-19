@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:star_wars_app/common/constants.dart';
 import 'package:star_wars_app/models/planet_model.dart';
 
-class PlanetsService extends ChangeNotifier {
+class PlanetService {
   final dio = Dio();
 
   Future<PlanetModel> getPlanet({required String id}) async {

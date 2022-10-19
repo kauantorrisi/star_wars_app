@@ -24,7 +24,7 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
 
   @override
   void initState() {
-    controller.getPlanet(widget.person.homeworld);
+    controller.initPersonDetails(widget.person);
     super.initState();
   }
 
@@ -32,11 +32,10 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Informações do personagem',
-          style: TextStyle(
-            fontSize: 16,
-          ),
+        title: const TextWidget(
+          text: 'Informações do personagem',
+          fontSize: 14,
+          fontFamily: 'Starjedi',
         ),
         centerTitle: true,
       ),
@@ -70,6 +69,10 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
                     TextWidget(
                       text:
                           'Diâmetro do planeta: ${controller.planet?.diameter ?? ''}',
+                      fontSize: 20,
+                    ),
+                    TextWidget(
+                      text: 'Nome da nave: ${controller.starship?.name ?? ''}',
                       fontSize: 20,
                     ),
                   ],
