@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:star_wars_app/pages/error_page.dart';
 import 'package:star_wars_app/pages/loading_page.dart';
+import 'package:star_wars_app/widgets/divider.widget.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
 import '../models/person_model.dart';
 
@@ -30,12 +31,12 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const TextWidget(
           text: 'Informações do personagem',
-          fontSize: 14,
-          fontFamily: 'Starjedi',
         ),
         centerTitle: true,
       ),
@@ -75,11 +76,52 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
                       text: 'Nome da nave: ${controller.starship?.name ?? ''}',
                       fontSize: 20,
                     ),
+                    SizedBox(height: screenSize.height * 0.05),
+                    const TextWidget(
+                      text: 'Filmes do personagem:',
+                      fontSize: 20,
+                      fontFamily: 'Starjedi',
+                    ),
+                    filmsList,
                   ],
                 ),
               ),
               if (controller.isLoading) const LoadingPage(),
               if (controller.isError) const ErrorPage(),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget get filmsList {
+    final screenSize = MediaQuery.of(context).size;
+
+    return SizedBox(
+      height: screenSize.height * 0.55,
+      child: ListView.builder(
+        itemCount: controller.films.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Modular.to.pushNamed('/film-details', arguments: {
+                    'title': widget.person.name,
+                    'film': controller.films[index]
+                  });
+                },
+                child: SizedBox(
+                  height: screenSize.height * 0.07,
+                  child: Center(
+                    child: TextWidget(
+                      text: controller.films[index].title,
+                    ),
+                  ),
+                ),
+              ),
+              const DividerWidget(),
             ],
           );
         },

@@ -1,9 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:star_wars_app/common/constants.dart';
+import 'package:star_wars_app/models/film_model.dart';
 import 'package:star_wars_app/models/person_model.dart';
 import 'package:star_wars_app/models/planet_model.dart';
 import 'package:star_wars_app/models/starship_model.dart';
+import 'package:star_wars_app/service/film_service.dart';
 import 'package:star_wars_app/service/person_service.dart';
 import 'package:star_wars_app/service/planet_service.dart';
 import 'package:star_wars_app/service/starship_service.dart';
@@ -15,6 +17,7 @@ abstract class _HomeControllerBase with Store {
   final PlanetService _planetsService = Modular.get();
   final PersonService _personService = Modular.get();
   final StarshipService _starshipService = Modular.get();
+  final FilmService _filmService = Modular.get();
 
   int page = 1;
 
@@ -23,6 +26,9 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   ObservableList<StarshipModel> starships = ObservableList<StarshipModel>();
+
+  @observable
+  ObservableList<FilmModel> films = ObservableList<FilmModel>();
 
   @observable
   StarshipModel? starship;
@@ -51,6 +57,7 @@ abstract class _HomeControllerBase with Store {
       setIsError(false);
       restartStarship();
       await getPlanet(person.homeworld);
+      await fetchFilms();
       if (person.starships.isNotEmpty) {
         await getStarship(person.starships[0]);
       }
@@ -68,6 +75,20 @@ abstract class _HomeControllerBase with Store {
       setIsError(false);
       starships = ObservableList<StarshipModel>();
       starships.addAll(await _starshipService.fetchStarships());
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+      setIsError(true);
+    }
+  }
+
+  @action
+  Future<void> fetchFilms() async {
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      films = ObservableList<FilmModel>();
+      films.addAll(await _filmService.fetchFilms());
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);

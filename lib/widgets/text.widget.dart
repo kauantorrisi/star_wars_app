@@ -4,12 +4,12 @@ class TextWidget extends StatelessWidget {
   const TextWidget({
     super.key,
     required this.text,
-    required this.fontSize,
-    this.fontFamily,
+    this.fontSize = 20,
+    this.fontFamily = 'Calibri',
   });
 
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final String? fontFamily;
 
   @override

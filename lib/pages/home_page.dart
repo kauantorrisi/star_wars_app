@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:star_wars_app/pages/error_page.dart';
 import 'package:star_wars_app/pages/loading_page.dart';
-import 'package:star_wars_app/widgets/button.widget.dart';
+import 'package:star_wars_app/widgets/divider.widget.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const TextWidget(
@@ -38,13 +38,6 @@ class _HomePageState extends State<HomePage> {
         return Column(
           children: [
             personList,
-            const Spacer(),
-            if (controller.page <= 9)
-              ButtonWidget(
-                onPressed: () => controller.fetchNextPagePersons(),
-                child: const Text('Carregar mais...'),
-              ),
-            SizedBox(height: screenSize.height * 0.025),
           ],
         );
       }),
@@ -52,29 +45,28 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget get personList {
-    final screenSize = MediaQuery.of(context).size;
-    return SizedBox(
-      height: controller.page <= 9
-          ? screenSize.height * 0.8
-          : screenSize.height * 0.85,
-      child: ListView.builder(
-        itemCount: controller.persons.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(controller.persons[index].name),
-                onTap: () {
-                  Modular.to.pushNamed(
-                    '/person-details',
-                    arguments: controller.persons[index],
-                  );
-                },
-              ),
-              const Divider(height: 10, color: Colors.white, thickness: 3),
-            ],
-          );
-        },
+    return Expanded(
+      child: LazyLoadScrollView(
+        onEndOfPage: () => controller.fetchNextPagePersons(),
+        child: ListView.builder(
+          itemCount: controller.persons.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(controller.persons[index].name.toLowerCase()),
+                  onTap: () {
+                    Modular.to.pushNamed(
+                      '/person-details',
+                      arguments: controller.persons[index],
+                    );
+                  },
+                ),
+                const DividerWidget(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
