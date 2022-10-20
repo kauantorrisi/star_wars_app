@@ -1,16 +1,25 @@
-# star_wars_app
+# Flutter App Star Wars
 
-A new Flutter project.
+Flutter App developed with MobX, Flutter Modular and Dio <br>{<br>
+  On the first screen we have a list of all the Star Wars characters.<br>
+  We can access any character to access the details of that character and see a list of the films he participated in.<br>
+  We can also access any of these films to see some details about it, such as, director, release date, producers, and the name.<br>
+}<br>
+<br>
+## If you don't want to do all the requests at the same time:
+Currently the app makes all 9 requests to the characters API at once, which can impact the performance of the app.<br>
+If you want to change this, I recommend using a lib called Lazy_Load_ScrollView that will make the next list of characters only load after the user swipes down.<br>
+<br>
+# App images:
 
-## Getting Started
+## SearchPage:<br>
+![image](https://user-images.githubusercontent.com/97469200/196990518-86cc0d74-e3f7-4227-92cc-25b9f0119f7b.png)<br>
 
-This project is a starting point for a Flutter application.
+## HomePage:<br>
+![image](https://user-images.githubusercontent.com/97469200/196990451-9aad11ce-3d22-42b9-8324-40fb5c1d4fa0.png)<br>
 
-A few resources to get you started if this is your first Flutter project:
+## Character Details Page:<br>
+![image](https://user-images.githubusercontent.com/97469200/196990597-859647e8-71d7-402f-b509-122eefa847a3.png)<br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Film Details Page:<br>
+![image](https://user-images.githubusercontent.com/97469200/196990668-ce326487-4fd2-493b-b877-85686feb4bd4.png)<br>
