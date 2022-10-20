@@ -1,32 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:star_wars_app/widgets/text.widget.dart';
-import '../widgets/loading.dart';
+import '../widgets/loading.widget.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
+        fit: StackFit.expand,
         children: [
           Image.network(
-            'https://r1.ilikewallpaper.net/pic/202006/r2dr-minimalism-99837-1242x2688_640.jpg',
+            'https://i.pinimg.com/originals/5c/79/c1/5c79c1ce194834d58ef0b9e330b46414.png',
             fit: BoxFit.cover,
           ),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: screenSize.height * 0.5),
-              child: const TextWidget(
-                text: 'STAR WARS',
-                fontSize: 40,
-                fontFamily: 'Starjedi',
-              ),
-            ),
-          ),
-          const Loading(),
+          const LoadingWidget(),
         ],
       ),
     );

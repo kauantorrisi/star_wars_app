@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:star_wars_app/widgets/text.widget.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({

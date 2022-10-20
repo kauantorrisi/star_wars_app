@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:star_wars_app/pages/error_page.dart';
+import 'package:star_wars_app/pages/loading_data_page.dart';
 import 'package:star_wars_app/pages/loading_page.dart';
 import 'package:star_wars_app/widgets/divider.widget.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
@@ -37,6 +38,7 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
       appBar: AppBar(
         title: const TextWidget(
           text: 'Informações do personagem',
+          fontSize: 16,
         ),
         centerTitle: true,
       ),
@@ -55,38 +57,26 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
                     TextWidget(
                         text: 'Gênero: ${widget.person.gender}', fontSize: 20),
                     TextWidget(
-                      text: 'Ano de aniversário: ${widget.person.birthYear}',
-                      fontSize: 20,
-                    ),
+                        text: 'Ano de aniversário: ${widget.person.birthYear}'),
                     TextWidget(
-                      text: 'Nome do planeta: ${controller.planet?.name ?? ''}',
-                      fontSize: 20,
-                    ),
+                        text:
+                            'Nome do planeta: ${controller.planet?.name ?? 'N/A'}'),
                     TextWidget(
-                      text:
-                          'Terreno do planeta: ${controller.planet?.terrain ?? ''}',
-                      fontSize: 20,
-                    ),
+                        text:
+                            'Terreno do planeta: ${controller.planet?.terrain ?? 'N/A'}'),
                     TextWidget(
-                      text:
-                          'Diâmetro do planeta: ${controller.planet?.diameter ?? ''}',
-                      fontSize: 20,
-                    ),
+                        text:
+                            'Diâmetro do planeta: ${controller.planet?.diameter ?? 'N/A'}'),
                     TextWidget(
-                      text: 'Nome da nave: ${controller.starship?.name ?? ''}',
-                      fontSize: 20,
-                    ),
+                        text:
+                            'Nome da nave: ${controller.starship?.name ?? 'N/A'}'),
                     SizedBox(height: screenSize.height * 0.05),
-                    const TextWidget(
-                      text: 'Filmes do personagem:',
-                      fontSize: 20,
-                      fontFamily: 'Starjedi',
-                    ),
+                    const TextWidget(text: 'Filmes do personagem:'),
                     filmsList,
                   ],
                 ),
               ),
-              if (controller.isLoading) const LoadingPage(),
+              if (controller.isLoading) const LoadingDataPage(),
               if (controller.isError) const ErrorPage(),
             ],
           );
@@ -98,8 +88,13 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
   Widget get filmsList {
     final screenSize = MediaQuery.of(context).size;
 
-    return SizedBox(
-      height: screenSize.height * 0.55,
+    return Container(
+      height: screenSize.height * 0.35,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.white,
+        ),
+      ),
       child: ListView.builder(
         itemCount: controller.films.length,
         itemBuilder: (context, index) {
@@ -113,7 +108,7 @@ class _PersonDetailsPageState extends State<PersonDetailsPage> {
                   });
                 },
                 child: SizedBox(
-                  height: screenSize.height * 0.07,
+                  height: screenSize.height * 0.055,
                   child: Center(
                     child: TextWidget(
                       text: controller.films[index].title,

@@ -28,8 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextWidget(
-            text: 'STAR WARS', fontSize: 20, fontFamily: 'Starjedi'),
+        title: const TextWidget(text: 'STAR WARS', fontSize: 20),
         centerTitle: true,
       ),
       body: Observer(builder: (_) {

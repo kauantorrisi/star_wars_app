@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:star_wars_app/models/film_model.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
 
@@ -9,7 +7,6 @@ class FilmsDetailsPage extends StatelessWidget {
 
   final String title;
   final FilmModel film;
-  // final HomeController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {

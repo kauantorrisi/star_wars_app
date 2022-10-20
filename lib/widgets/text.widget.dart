@@ -5,20 +5,18 @@ class TextWidget extends StatelessWidget {
     super.key,
     required this.text,
     this.fontSize = 20,
-    this.fontFamily = 'Calibri',
   });
 
   final String text;
   final double? fontSize;
-  final String? fontFamily;
+  // final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      text.toLowerCase(),
       style: TextStyle(
         fontSize: fontSize,
-        fontFamily: fontFamily,
       ),
     );
   }
