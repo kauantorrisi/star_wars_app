@@ -4,7 +4,7 @@ class TextWidget extends StatelessWidget {
   const TextWidget({
     super.key,
     required this.text,
-    this.fontSize = 20,
+    this.fontSize = 17,
   });
 
   final String text;
