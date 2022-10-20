@@ -6,7 +6,7 @@ Flutter App developed with MobX, Flutter Modular and Dio <br>{<br>
   We can also access any of these films to see some details about it, such as, director, release date, producers, and the name.<br>
 }<br>
 <br>
-## If you are going to use the code:
+## If you don't want to do all the requests at the same time:
 Currently the app makes all 9 requests to the characters API at once, which can impact the performance of the app.<br>
 If you want to change this, I recommend using a lib called Lazy_Load_ScrollView that will make the next list of characters only load after the user swipes down.<br>
 <br>
