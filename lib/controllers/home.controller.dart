@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:star_wars_app/common/constants.dart';
@@ -32,7 +31,6 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   ObservableList<FilmModel> films = ObservableList<FilmModel>();
-
   @observable
   ObservableList<PersonModel> researchedPersons = ObservableList<PersonModel>();
 
@@ -129,20 +127,6 @@ abstract class _HomeControllerBase with Store {
       setIsError(true);
     }
   }
-
-  // @action
-  // Future<void> fetchNextPagePersons() async {
-  //   try {
-  //     setIsError(false);
-  //     page++;
-  //     if (page > 9) {
-  //       return;
-  //     }
-  //     persons.addAll(await _personService.fetchPersons(page: page));
-  //   } catch (e) {
-  //     setIsError(true);
-  //   }
-  // }
 
   @action
   Future<void> filterPersons(String searchControllerText) async {
