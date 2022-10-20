@@ -41,6 +41,38 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$filmsAtom =
+      Atom(name: '_HomeControllerBase.films', context: context);
+
+  @override
+  ObservableList<FilmModel> get films {
+    _$filmsAtom.reportRead();
+    return super.films;
+  }
+
+  @override
+  set films(ObservableList<FilmModel> value) {
+    _$filmsAtom.reportWrite(value, super.films, () {
+      super.films = value;
+    });
+  }
+
+  late final _$researchedPersonsAtom =
+      Atom(name: '_HomeControllerBase.researchedPersons', context: context);
+
+  @override
+  ObservableList<PersonModel> get researchedPersons {
+    _$researchedPersonsAtom.reportRead();
+    return super.researchedPersons;
+  }
+
+  @override
+  set researchedPersons(ObservableList<PersonModel> value) {
+    _$researchedPersonsAtom.reportWrite(value, super.researchedPersons, () {
+      super.researchedPersons = value;
+    });
+  }
+
   late final _$starshipAtom =
       Atom(name: '_HomeControllerBase.starship', context: context);
 
@@ -105,12 +137,52 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  late final _$isSearchingAtom =
+      Atom(name: '_HomeControllerBase.isSearching', context: context);
+
+  @override
+  bool get isSearching {
+    _$isSearchingAtom.reportRead();
+    return super.isSearching;
+  }
+
+  @override
+  set isSearching(bool value) {
+    _$isSearchingAtom.reportWrite(value, super.isSearching, () {
+      super.isSearching = value;
+    });
+  }
+
+  late final _$searchControllerAtom =
+      Atom(name: '_HomeControllerBase.searchController', context: context);
+
+  @override
+  TextEditingController get searchController {
+    _$searchControllerAtom.reportRead();
+    return super.searchController;
+  }
+
+  @override
+  set searchController(TextEditingController value) {
+    _$searchControllerAtom.reportWrite(value, super.searchController, () {
+      super.searchController = value;
+    });
+  }
+
   late final _$fetchStarShipsAsyncAction =
       AsyncAction('_HomeControllerBase.fetchStarShips', context: context);
 
   @override
   Future<void> fetchStarShips() {
     return _$fetchStarShipsAsyncAction.run(() => super.fetchStarShips());
+  }
+
+  late final _$fetchFilmsAsyncAction =
+      AsyncAction('_HomeControllerBase.fetchFilms', context: context);
+
+  @override
+  Future<void> fetchFilms() {
+    return _$fetchFilmsAsyncAction.run(() => super.fetchFilms());
   }
 
   late final _$fetchPersonsAsyncAction =
@@ -121,13 +193,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$fetchPersonsAsyncAction.run(() => super.fetchPersons());
   }
 
-  late final _$fetchNextPagePersonsAsyncAction =
-      AsyncAction('_HomeControllerBase.fetchNextPagePersons', context: context);
+  late final _$filterPersonsAsyncAction =
+      AsyncAction('_HomeControllerBase.filterPersons', context: context);
 
   @override
-  Future<void> fetchNextPagePersons() {
-    return _$fetchNextPagePersonsAsyncAction
-        .run(() => super.fetchNextPagePersons());
+  Future<void> filterPersons(String searchControllerText) {
+    return _$filterPersonsAsyncAction
+        .run(() => super.filterPersons(searchControllerText));
   }
 
   late final _$getPlanetAsyncAction =
@@ -148,6 +220,17 @@ mixin _$HomeController on _HomeControllerBase, Store {
 
   late final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase', context: context);
+
+  @override
+  void setIsResearched(bool value) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setIsResearched');
+    try {
+      return super.setIsResearched(value);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setIsLoading(bool value) {
@@ -172,6 +255,17 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  void setIsSearching(bool value) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.setIsSearching');
+    try {
+      return super.setIsSearching(value);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void restartStarship() {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
         name: '_HomeControllerBase.restartStarship');
@@ -187,10 +281,14 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return '''
 persons: ${persons},
 starships: ${starships},
+films: ${films},
+researchedPersons: ${researchedPersons},
 starship: ${starship},
 planet: ${planet},
 isLoading: ${isLoading},
-isError: ${isError}
+isError: ${isError},
+isSearching: ${isSearching},
+searchController: ${searchController}
     ''';
   }
 }

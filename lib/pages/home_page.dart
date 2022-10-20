@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:star_wars_app/pages/error_page.dart';
@@ -49,27 +48,24 @@ class _HomePageState extends State<HomePage> {
 
   Widget get personsList {
     return Expanded(
-      child: LazyLoadScrollView(
-        onEndOfPage: () => controller.fetchNextPagePersons(),
-        child: ListView.builder(
-          itemCount: controller.persons.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ListTile(
-                  title: TextWidget(text: controller.persons[index].name),
-                  onTap: () {
-                    Modular.to.pushNamed(
-                      '/person-details',
-                      arguments: controller.persons[index],
-                    );
-                  },
-                ),
-                const DividerWidget(),
-              ],
-            );
-          },
-        ),
+      child: ListView.builder(
+        itemCount: controller.persons.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              ListTile(
+                title: TextWidget(text: controller.persons[index].name),
+                onTap: () {
+                  Modular.to.pushNamed(
+                    '/person-details',
+                    arguments: controller.persons[index],
+                  );
+                },
+              ),
+              const DividerWidget(),
+            ],
+          );
+        },
       ),
     );
   }

@@ -22,7 +22,7 @@ abstract class _HomeControllerBase with Store {
   final StarshipService _starshipService = Modular.get();
   final FilmService _filmService = Modular.get();
 
-  int page = 1;
+  List<int> pages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   @observable
   ObservableList<PersonModel> persons = ObservableList<PersonModel>();
@@ -120,7 +120,9 @@ abstract class _HomeControllerBase with Store {
       setIsLoading(true);
       setIsError(false);
       persons = ObservableList<PersonModel>();
-      persons.addAll(await _personService.fetchPersons());
+      for (var page in pages) {
+        persons.addAll(await _personService.fetchPersons(page: page));
+      }
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);
@@ -128,19 +130,19 @@ abstract class _HomeControllerBase with Store {
     }
   }
 
-  @action
-  Future<void> fetchNextPagePersons() async {
-    try {
-      setIsError(false);
-      page++;
-      if (page > 9) {
-        return;
-      }
-      persons.addAll(await _personService.fetchPersons(page: page));
-    } catch (e) {
-      setIsError(true);
-    }
-  }
+  // @action
+  // Future<void> fetchNextPagePersons() async {
+  //   try {
+  //     setIsError(false);
+  //     page++;
+  //     if (page > 9) {
+  //       return;
+  //     }
+  //     persons.addAll(await _personService.fetchPersons(page: page));
+  //   } catch (e) {
+  //     setIsError(true);
+  //   }
+  // }
 
   @action
   Future<void> filterPersons(String searchControllerText) async {
