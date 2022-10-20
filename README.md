@@ -7,7 +7,7 @@ Flutter App developed with MobX, Flutter Modular and Dio <br>{<br>
 }
 
 
-## App images:
+# App images:
 
 ## SearchPage:<br>
 ![image](https://user-images.githubusercontent.com/97469200/196990518-86cc0d74-e3f7-4227-92cc-25b9f0119f7b.png)<br>
