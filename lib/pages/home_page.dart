@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:star_wars_app/pages/error_page.dart';
 import 'package:star_wars_app/pages/loading_page.dart';
 import 'package:star_wars_app/widgets/divider.widget.dart';
+import 'package:star_wars_app/widgets/search.widget.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextWidget(text: 'STAR WARS', fontSize: 20),
+        title: const TextWidget(text: 'STAR WARS', fontSize: 25),
         centerTitle: true,
       ),
       body: Observer(builder: (_) {
@@ -36,14 +37,17 @@ class _HomePageState extends State<HomePage> {
         if (controller.isError) return const ErrorPage();
         return Column(
           children: [
-            personList,
+            SearchWidget(
+                textController: controller.searchController,
+                onChanged: (value) => controller.filterPersons(value)),
+            if (controller.isSearching) researchedPersonsList else personsList,
           ],
         );
       }),
     );
   }
 
-  Widget get personList {
+  Widget get personsList {
     return Expanded(
       child: LazyLoadScrollView(
         onEndOfPage: () => controller.fetchNextPagePersons(),
@@ -53,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             return Column(
               children: [
                 ListTile(
-                  title: Text(controller.persons[index].name.toLowerCase()),
+                  title: TextWidget(text: controller.persons[index].name),
                   onTap: () {
                     Modular.to.pushNamed(
                       '/person-details',
@@ -68,5 +72,37 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Widget get researchedPersonsList {
+    return controller.researchedPersons.isEmpty
+        ? const ListTile(
+            title: TextWidget(
+              text: 'Não foi encontrado nenhum resultado',
+              fontSize: 15,
+            ),
+          )
+        : Expanded(
+            child: ListView.builder(
+              itemCount: controller.researchedPersons.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    ListTile(
+                      title: TextWidget(
+                          text: controller.researchedPersons[index].name),
+                      onTap: () {
+                        Modular.to.pushNamed(
+                          '/person-details',
+                          arguments: controller.researchedPersons[index],
+                        );
+                      },
+                    ),
+                    const DividerWidget(),
+                  ],
+                );
+              },
+            ),
+          );
   }
 }

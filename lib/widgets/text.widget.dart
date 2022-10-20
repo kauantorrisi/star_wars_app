@@ -9,7 +9,6 @@ class TextWidget extends StatelessWidget {
 
   final String text;
   final double? fontSize;
-  // final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {

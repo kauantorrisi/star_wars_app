@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:star_wars_app/controllers/home.controller.dart';
 import 'package:star_wars_app/pages/error_page.dart';
 import 'package:star_wars_app/pages/loading_data_page.dart';
-import 'package:star_wars_app/pages/loading_page.dart';
 import 'package:star_wars_app/widgets/divider.widget.dart';
 import 'package:star_wars_app/widgets/text.widget.dart';
 import '../models/person_model.dart';

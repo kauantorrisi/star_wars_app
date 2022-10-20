@@ -12,7 +12,7 @@ class LoadingPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.network(
-            'https://i.pinimg.com/originals/5c/79/c1/5c79c1ce194834d58ef0b9e330b46414.png',
+            'https://wallpaperaccess.com/full/199667.jpg',
             fit: BoxFit.cover,
           ),
           const LoadingWidget(),

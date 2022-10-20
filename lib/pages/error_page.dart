@@ -22,7 +22,7 @@ class ErrorPage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: screenSize.height * 0.3),
               child: const TextWidget(
-                text: 'An error has ocurred...',
+                text: 'Ocorreu um erro...',
                 fontSize: 20,
               ),
             ),

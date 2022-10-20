@@ -20,7 +20,7 @@ class LoadingDataPage extends StatelessWidget {
           Center(
             child: Padding(
               padding: EdgeInsets.only(top: screenSize.height * 0.5),
-              child: const TextWidget(text: 'Carrengado dados...'),
+              child: const TextWidget(text: 'Carregando dados...'),
             ),
           ),
           const LoadingWidget(),

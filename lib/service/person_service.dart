@@ -6,6 +6,17 @@ import 'package:dio/dio.dart';
 class PersonService {
   final Dio dio = Dio();
 
+  Future<List<PersonModel>> searchPersons(
+      {required String searchControllerText}) async {
+    List<PersonModel> researchedPersons = [];
+    Response response = await dio.get(URL_SEARCH + searchControllerText);
+    List results = response.data['results'];
+    for (var person in results) {
+      researchedPersons.add(PersonModel.fromMap(person));
+    }
+    return researchedPersons;
+  }
+
   Future<List<PersonModel>> fetchPersons({int? page}) async {
     List<PersonModel> persons = [];
     Response response = await dio
@@ -17,5 +28,3 @@ class PersonService {
     return persons;
   }
 }
-// filtrar array campo de busca.
-// persons.where((element) => element.name.contains(textController));

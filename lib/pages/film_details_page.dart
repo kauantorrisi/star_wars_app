@@ -13,7 +13,7 @@ class FilmsDetailsPage extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: TextWidget(text: title),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
