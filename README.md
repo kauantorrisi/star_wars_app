@@ -1,9 +1,9 @@
 # Flutter App Star Wars
 
-Flutter App developed with MobX, Flutter Modular and Dio {
-  On the first screen we have a list of all the Star Wars characters.
-  We can access any character to access the details of that character and see a list of the films he participated in.
-  We can also access any of these films to see some details about it, such as, director, release date, producers, and the name.
+Flutter App developed with MobX, Flutter Modular and Dio <br>{
+  On the first screen we have a list of all the Star Wars characters.<br>
+  We can access any character to access the details of that character and see a list of the films he participated in.<br>
+  We can also access any of these films to see some details about it, such as, director, release date, producers, and the name.<br>
 }
 
 
